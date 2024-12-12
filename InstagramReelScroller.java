@@ -1,11 +1,15 @@
-package autoScroller;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import autoScroller.userInfo;
+import java.util.Scanner;
+
+
+
+import java.io.Console;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -17,9 +21,17 @@ public class InstagramReelScroller {
 
     public static void main(String[] args) {
         try {
+            Console console = System.console(); 
+            Scanner s = new Scanner(System.in);
+            System.out.println("Enter username: ");
+            String user = s.next();
+            
+            char[] passwordArr = console.readPassword("Enter password");
+            String password = new String(passwordArr);
+            
             initializeDriver();
             navigateToInstagram();
-            performLogin(userInfo.userName, userInfo.password);
+            performLogin(user, password);
             saveLoginInfo();  // Press "Save Info"
             waitForXSeconds(5);
             navigateToReels();  // Navigate to Reels section
@@ -72,8 +84,7 @@ public class InstagramReelScroller {
     }
 
     // Method to save login information
-    // Method to save login information
-// Method to save login information
+  
 private static void saveLoginInfo() {
     try {
         // Wait for the "Save Info" button to be clickable using its class
@@ -217,6 +228,8 @@ public static void scrollReels(int reels) {
 
 
 }
+
+
 
 
 
