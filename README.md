@@ -8,7 +8,6 @@ Helps productivity!
 - Scrolls through Instagram reels automatically
 
 ## Install
-NOTE: Enter your instagram username and password
-  https://drive.google.com/file/d/1eBEZG8oFmn9SVMR-P06iz6z5Zo9WJrjp/view?usp=sharing
+NOTE: Enter your instagram username and password<br>https://drive.google.com/file/d/1eBEZG8oFmn9SVMR-P06iz6z5Zo9WJrjp/view?usp=sharing
 
 
