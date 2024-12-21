@@ -6,6 +6,7 @@ Helps productivity!
 
 - Automatic login to Instagram
 - Scrolls through Instagram reels automatically
+- GUI
 
 
 
