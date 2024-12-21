@@ -126,6 +126,7 @@ public static void scrollReels(int reels) {
     for (int i = 0; i < reels; i++) {
         // Locate all video elements on the page
         List<WebElement> videos = driver.findElements(By.tagName("video"));
+        
         WebElement currentVideo = null;
 
         // Check each video for visibility and playback status
@@ -144,6 +145,7 @@ public static void scrollReels(int reels) {
         if (currentVideo != null && currentVideo.isDisplayed()) {
             String videoUrl = currentVideo.getDomAttribute("src");
             System.out.println("Playing video with src: " + videoUrl);
+            System.out.println("Videos loaded: " + videos.size());
 
             // Get the duration of the current video
             long duration = ((Number) ((JavascriptExecutor) driver)
