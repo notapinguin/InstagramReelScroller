@@ -5,11 +5,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.Scanner;
-
-
-
-import java.io.Console;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,18 +15,34 @@ public class InstagramReelScroller {
     private static WebDriverWait wait;
 
     public static void main(String[] args) {
-        try {
-            Console console = System.console(); 
-            Scanner s = new Scanner(System.in);
-            System.out.println("Enter username: ");
-            String user = s.next();
+
+        InstagramReelUI[] ui = new InstagramReelUI[1]; // Use an array to allow modification in the lambda
+       
+        ui[0] = new InstagramReelUI(e -> {
+            String username = ui[0].getUsername();
+            String password = ui[0].getPassword();
             
-            char[] passwordArr = console.readPassword("Enter password");
-            String password = new String(passwordArr);
-            
-            initializeDriver();
+
+            if (username.isEmpty() || password.isEmpty()) {
+                ui[0].showError("Please enter both username and password.");
+            } else {
+                // Run Selenium logic in a separate thread to avoid blocking the UI
+                new Thread(() -> {
+                    try {
+                        startScrolling(username, password);
+                    } finally {
+                        ui[0].close();
+                    }
+                }).start();
+            }
+        });
+    }
+    
+
+    private static void startScrolling(String username, String password){
+        initializeDriver();
             navigateToInstagram();
-            performLogin(user, password);
+            performLogin(username, password);
             saveLoginInfo();  // Press "Save Info"
             waitForXSeconds(5);
             navigateToReels();  // Navigate to Reels section
@@ -39,12 +50,6 @@ public class InstagramReelScroller {
             while(true){
                 scrollReels(10);
             }
-            
-        } finally {
-            if (driver != null) {
-                driver.quit();
-            }
-        }
     }
 
     // Method to initialize the WebDriver
@@ -230,7 +235,6 @@ public static void scrollReels(int reels) {
 
 
 }
-
 
 
 
