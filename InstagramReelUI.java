@@ -26,7 +26,7 @@ public class InstagramReelUI {
         // Frame setup
         frame = new JFrame("Instagram Reel Scroller");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 350);
+        frame.setSize(700, 350);
         frame.setLocationRelativeTo(null);
         frame.setLayout(new BorderLayout());
 
@@ -37,7 +37,7 @@ public class InstagramReelUI {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // Header
-        JLabel headerLabel = new JLabel("Welcome back");
+        JLabel headerLabel = new JLabel("Enter Instagram Username and Password");
         headerLabel.setFont(customFont.deriveFont(Font.BOLD, 20));
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerLabel.setForeground(Color.WHITE);
@@ -92,17 +92,60 @@ public class InstagramReelUI {
         loginButton.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(Color.decode("#1A80E6"), 1),
             BorderFactory.createEmptyBorder(5, 5, 5, 5)));
-        loginButton.addActionListener(onLoginClick);
+
+        // Disable the button after one click
+        loginButton.addActionListener(e -> {
+            loginButton.setEnabled(false); // Disable button during execution
+            boolean gameCompleted = runMazeGame(frame); // Block until the game finishes
+            if (gameCompleted) {
+                JOptionPane.showMessageDialog(frame, "Maze solved! Resuming application.");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Game exited early.");
+            }
+            loginButton.setEnabled(true); // Re-enable after game finishes
+        });
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.decode("#000000"));
         buttonPanel.add(loginButton);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
+
         // Add to Frame
         frame.add(mainPanel);
         frame.setVisible(true);
     }
+    private static boolean runMazeGame(JFrame parent) {
+        final boolean[] gameCompleted = {false}; // Track if the game was solved
+    
+        // Create a modal dialog to host the game
+        JDialog gameDialog = new JDialog(parent, "Maze Solver", true);
+        gameDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+    
+        // Create a GameFrame with a callback for when the game is completed
+        GameFrame gameFrame = new GameFrame(() -> {
+            gameCompleted[0] = true;
+            gameDialog.dispose(); // Close the dialog when the game is solved
+        });
+    
+        // Use the MazePanel from GameFrame as the main content
+        gameDialog.getContentPane().add(gameFrame.getContentPane());
+    
+        // Adjust dialog size and position
+        gameDialog.pack();
+        gameDialog.setLocationRelativeTo(parent);
+    
+        // Show the dialog (blocks the parent thread)
+        gameDialog.setVisible(true);
+    
+        return gameCompleted[0];
+    }
+    
+    
+    
+
+
 
     private void loadCustomFont() {
         try {
