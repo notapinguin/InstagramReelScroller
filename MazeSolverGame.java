@@ -32,7 +32,8 @@ class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         resetGame();
-        setLocationRelativeTo(null);
+        
+        add(mazePanel);
         setVisible(true);
     }
 
@@ -100,6 +101,7 @@ class MazePanel extends JPanel {
     private boolean firstMaze = true;
     private boolean showShortestPath = false; // Controls whether to show the shortest path
     private StringBuilder typedInput = new StringBuilder();
+    private JLabel headerLabel;
     
 
     public MazePanel(int rows, int cols, GameFrame gameFrame) {
@@ -110,16 +112,26 @@ class MazePanel extends JPanel {
         this.player = new MazePoint(1, 1, 0);
         this.exit = new MazePoint(rows - 2, cols - 2, 0);
         this.firstMaze = true;
+        
         generateMaze();
         if (shortestPath == null) {
             findShortestPath();
         }
-    
-        setPreferredSize(new Dimension(cols * cellSize, rows * cellSize));
-        
-        setBackground(Color.WHITE);
-        addKeyListener(new PlayerControl(gameFrame)); // Pass gameFrame to the key listener
-        setFocusable(true);
+        headerLabel = new JLabel("Find the most optimal route to escape the maze. You may not leave the optimal path at any point.", SwingConstants.CENTER);
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 12));
+        headerLabel.setPreferredSize(new Dimension(cols * cellSize, 30)); // Adjust header height
+
+        setLayout(new BorderLayout());
+        add(headerLabel, BorderLayout.SOUTH);
+
+    // Add some padding/margin to move the maze down
+    setPreferredSize(new Dimension(cols * cellSize, rows * cellSize + headerLabel.getPreferredSize().height )); // Added 20px of extra height
+
+    // Set the panel background and other configurations
+    setBackground(Color.WHITE);
+    addKeyListener(new PlayerControl(gameFrame)); // Pass gameFrame to the key listener
+    setFocusable(true);
+
     }
     
     public Dimension getSize() {
