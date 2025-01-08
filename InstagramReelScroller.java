@@ -15,33 +15,12 @@ public class InstagramReelScroller {
     private static WebDriverWait wait;
 
     public static void main(String[] args) {
-        
-        
-
         InstagramReelUI[] ui = new InstagramReelUI[1]; // Use an array to allow modification in the lambda
-       
-        ui[0] = new InstagramReelUI(e -> {
-            String username = ui[0].getUsername();
-            String password = ui[0].getPassword();
-            
-
-            if (username.isEmpty() || password.isEmpty()) {
-                ui[0].showError("Please enter both username and password.");
-            } else {
-                // Run Selenium logic in a separate thread to avoid blocking the UI
-                new Thread(() -> {
-                    try {
-                        startScrolling(username, password);
-                    } finally {
-                        ui[0].close();
-                    }
-                }).start();
-            }
-        });
+        ui[0] = new InstagramReelUI(e -> {});
     }
     
 
-    private static void startScrolling(String username, String password){
+    static void startScrolling(String username, String password){
         initializeDriver();
             navigateToInstagram();
             performLogin(username, password);
