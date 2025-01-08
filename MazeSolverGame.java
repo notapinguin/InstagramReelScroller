@@ -29,7 +29,8 @@ class GameFrame extends JFrame {
     public GameFrame(Runnable onGameComplete) {
         this.onGameComplete = onGameComplete;
         setTitle("Maze Solver");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
         resetGame();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -38,7 +39,8 @@ class GameFrame extends JFrame {
 
     public GameFrame() {
         setTitle("Maze Solver");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
         resetGame(); // Initialize the first maze
         setLocationRelativeTo(null);
         setVisible(true);
@@ -48,11 +50,12 @@ class GameFrame extends JFrame {
         Random rand = new Random();
         boolean feelingLucky = rand.nextBoolean();
         int impossibleMaze = rand.nextInt(100);
-
+        
         int value = 5 + rand.nextInt(201);
         if (feelingLucky) value = 17 + rand.nextInt(21);
         if(impossibleMaze <= 2) value = 261;
         this.rows = value%2==0?value+1:value; // Random between 21 and 101    
+        
         
         this.cols = rows; // Ensure square maze
         System.out.println("New Maze Size: " + rows + "x" + cols);
@@ -352,7 +355,7 @@ class MazePanel extends JPanel {
             }
         
             if (player.equals(exit)) {
-                JOptionPane.showMessageDialog(MazePanel.this, "You solved the maze!");
+                
                 if (onGameComplete != null) {
                     onGameComplete.run();
                 }
@@ -368,10 +371,12 @@ class MazePanel extends JPanel {
 
     
             if (player.equals(exit)) {
-                JOptionPane.showMessageDialog(MazePanel.this, "You solved the maze!");
+                
                 if (onGameComplete != null) {
                     onGameComplete.run(); // Notify the main program
                 }
+                gameFrame.dispose();  // Close the game window
+                       
             }
             
         }
