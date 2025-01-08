@@ -121,7 +121,7 @@ public class InstagramReelUI {
     
         // Create a modal dialog to host the game
         JDialog gameDialog = new JDialog(parent, "Maze Solver", true);
-        gameDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        gameDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
     
         // Create a GameFrame with a callback for when the game is completed
         GameFrame gameFrame = new GameFrame(() -> {
