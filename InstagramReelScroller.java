@@ -15,6 +15,8 @@ public class InstagramReelScroller {
     private static WebDriverWait wait;
 
     public static void main(String[] args) {
+        
+        
 
         InstagramReelUI[] ui = new InstagramReelUI[1]; // Use an array to allow modification in the lambda
        
@@ -124,14 +126,13 @@ private static void waitForXSeconds(int seconds) {
 }
 
 public static void scrollReels(int reels) {
-   AtomicBoolean stopReelDetection = new AtomicBoolean(false);
+    AtomicBoolean stopReelDetection = new AtomicBoolean(false);
 
     Actions actions = new Actions(driver);
 
     for (int i = 0; i < reels; i++) {
         // Locate all video elements on the page
         List<WebElement> videos = driver.findElements(By.tagName("video"));
-        
         WebElement currentVideo = null;
 
         // Check each video for visibility and playback status
@@ -147,43 +148,46 @@ public static void scrollReels(int reels) {
             }
         }
 
+        // Clear the videos list to free memory
+        videos.clear();
+        videos = null;
+
         if (currentVideo != null && currentVideo.isDisplayed()) {
             String videoUrl = currentVideo.getDomAttribute("src");
             System.out.println("Playing video with src: " + videoUrl);
-            System.out.println("Videos loaded: " + videos.size());
 
             // Get the duration of the current video
             long duration = ((Number) ((JavascriptExecutor) driver)
                     .executeScript("return arguments[0].duration;", currentVideo)).longValue();
-            System.out.println("Initial Video Duration: " + duration + " seconds");
 
             // Wait until the video finishes playing
             boolean isVideoPlaying = true;
             while (isVideoPlaying) {
-                // Check for stopping condition (if stopReelDetection is set)
                 if (stopReelDetection.get()) {
                     System.out.println("Stopping reel detection.");
                     isVideoPlaying = false;
                     break;
                 }
 
-                // Update current time and check if the video has ended
                 long currentTime = ((Number) ((JavascriptExecutor) driver)
                         .executeScript("return arguments[0].currentTime;", currentVideo)).longValue();
-                boolean isEnded = Math.abs(currentTime - duration) < 2;
+                boolean isEnded = Math.abs(currentTime - duration) < 2  ;
 
-                System.out.println("Current Time: " + currentTime + " / Duration: " + duration);
-                System.out.println("Is Video Ended: " + isEnded);
+                // Constantly print video details
+                System.out.println("Video Length: " + duration + " seconds");
+                System.out.println("Elapsed Time: " + currentTime + " seconds");
 
-                // Update duration in case it's changed (reloading or rebuffering)
-                duration = ((Number) ((JavascriptExecutor) driver)
-                        .executeScript("return arguments[0].duration;", currentVideo)).longValue();
+                List<WebElement> loadedVideos = driver.findElements(By.tagName("video"));
+                System.out.println("Number of Loaded Videos: " + loadedVideos.size());
 
-                // If the video is finished, break the loop
+                // Clear the list of loaded videos to free memory
+                loadedVideos.clear();
+                loadedVideos = null;
+
                 if (isEnded) {
                     isVideoPlaying = false;
                 } else {
-                    // If the user manually scrolled to a new video, update the current video
+                    // Handle user scrolling to a new video
                     List<WebElement> newVideos = driver.findElements(By.tagName("video"));
                     WebElement newCurrentVideo = null;
                     for (WebElement video : newVideos) {
@@ -198,25 +202,24 @@ public static void scrollReels(int reels) {
                         }
                     }
 
-                    // If the user has manually scrolled to a new video, update the current video
+                    newVideos.clear();
+                    newVideos = null;
+
                     if (newCurrentVideo != null) {
                         System.out.println("User manually scrolled to a new video.");
                         currentVideo = newCurrentVideo;
                         duration = ((Number) ((JavascriptExecutor) driver)
                                 .executeScript("return arguments[0].duration;", currentVideo)).longValue();
-                        System.out.println("Updated Video Duration: " + duration + " seconds");
                     }
                 }
 
-                // Pause and check every second
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(1000); // Pause to print details every second
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
-            // Scroll to the next reel after the current video finishes
             if (!isVideoPlaying) {
                 System.out.println("Scrolling to next reel");
                 actions.sendKeys(Keys.ARROW_DOWN).perform();
@@ -231,6 +234,8 @@ public static void scrollReels(int reels) {
         }
     }
 }
+
+
 
 
 
