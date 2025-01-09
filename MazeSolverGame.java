@@ -15,7 +15,8 @@ import java.util.Random;
 
 public class MazeSolverGame {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(GameFrame::new);
+        SwingUtilities.invokeLater(() -> new GameFrame());
+
     }
 }
 
@@ -32,30 +33,37 @@ class GameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         resetGame();
-        
         add(mazePanel);
+        pack(); // Ensure window is packed after adding components
+        setLocationRelativeTo(null); // Center the window
         setVisible(true);
     }
-
-
     public GameFrame() {
         setTitle("Maze Solver");
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         resetGame(); // Initialize the first maze
         setLocationRelativeTo(null);
         setVisible(true);
     }
+    public MazePanel getMazePanel() {
+        return mazePanel; // Return the maze panel so it can be added to JDialog
+    }
+
+
+
+    
 
     private void randomizeDimensions() {
         Random rand = new Random();
-        boolean feelingLucky = rand.nextBoolean();
+        boolean feelingLucky = rand.nextInt(100) <= 75;
         int impossibleMaze = rand.nextInt(100);
+
+        int value = 9 + rand.nextInt(9); // Generate a value between 9 and 17 (inclusive)
+        if (feelingLucky) value = 9 + rand.nextInt(9); // Optionally make the maze size between 9 and 17
+        if (impossibleMaze <= 2) value = 261; // "Impossible" maze case
+
+        this.rows = value % 2 == 0 ? value + 1 : value; // Ensure rows is odd
         
-        int value = 5 + rand.nextInt(201);
-        if (feelingLucky) value = 17 + rand.nextInt(21);
-        if(impossibleMaze <= 2) value = 261;
-        this.rows = value%2==0?value+1:value; // Random between 21 and 101    
         
         
         this.cols = rows; // Ensure square maze
