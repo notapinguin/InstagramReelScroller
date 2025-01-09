@@ -11,6 +11,8 @@ public class InstagramReelUI {
     private JTextField usernameField;
     private JPasswordField passwordField;
     private Font customFont;
+    private double mazeChance = 0.8;
+    private boolean startScrolling = false;
 
     public InstagramReelUI(ActionListener onLoginClick) {
         // Set the FlatLaf look and feel
@@ -95,15 +97,36 @@ public class InstagramReelUI {
 
         // Disable the button after one click
         loginButton.addActionListener(e -> {
-            loginButton.setEnabled(false); // Disable button during execution
-            boolean gameCompleted = runMazeGame(frame); // Block until the game finishes
-            if (gameCompleted) {
-                JOptionPane.showMessageDialog(frame, "Maze solved! Resuming application.");
+            // Disable button during execution
+            loginButton.setEnabled(false);
+            // Generate a random number between 0 and 1
+            double randomChance = Math.random();
+
+            if (randomChance < mazeChance) {
+                // 75% chance (initial) to go to the maze
+                boolean gameCompleted = runMazeGame(frame); // Block until the game finishes
+                if (gameCompleted) {
+                    // Decrease the maze chance by half after completing the maze
+                    mazeChance = mazeChance == 0 ? mazeChance : mazeChance/2.0;
+                }
             } else {
-                JOptionPane.showMessageDialog(frame, "Game exited early.");
+                // 25% chance (initial) to go to the Instagram login screen
+                startScrolling = true; // Set flag to true to trigger scrolling
+                loginButton.setEnabled(false);
             }
-            loginButton.setEnabled(true); // Re-enable after game finishes
+
+            loginButton.setEnabled(true); // Re-enable after action is finished
+
+            // Trigger the scrolling after the login button action
+            if (startScrolling) {
+                new Thread(() -> {
+                    loginButton.setEnabled(false);
+                    // Start scrolling when the flag is set to true
+                    InstagramReelScroller.startScrolling(getUsername(), getPassword());
+                }).start();
+            }
         });
+
 
 
         JPanel buttonPanel = new JPanel();
@@ -129,8 +152,8 @@ public class InstagramReelUI {
             gameDialog.dispose(); // Close the dialog when the game is solved
         });
     
-        // Use the MazePanel from GameFrame as the main content
-        gameDialog.getContentPane().add(gameFrame.getContentPane());
+        // Add the MazePanel from the GameFrame to the JDialog (extract MazePanel)
+        gameDialog.getContentPane().add(gameFrame.getMazePanel(), BorderLayout.CENTER); // Access MazePanel and add to JDialog
     
         // Adjust dialog size and position
         gameDialog.pack();
@@ -141,6 +164,7 @@ public class InstagramReelUI {
     
         return gameCompleted[0];
     }
+    
     
     
     
