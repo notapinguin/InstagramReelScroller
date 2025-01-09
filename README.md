@@ -1,6 +1,6 @@
 # Instagram Reel Scroller
 
-InstagramReelUI is a Java-based graphical user interface (GUI) for logging into Instagram using a username and password. The application uses Flatlaf and Java Swing for modern UI styling and includes custom font support, a login form with username and password fields, and a login button. It also integrates a maze game that has a chance to be launched after the login button is clicked, the completion of this game is mandatory, after the game launches, users will not be able to use the program without completing the game. Upon completion of the game, users can try to login again.  
+InstagramReelUI is a Java-based graphical user interface (GUI) for logging into Instagram using a username and password. The application uses Flatlaf and Java Swing for modern UI styling and includes custom font support, a login form with username and password fields, and a login button. It also integrates a maze game that has a chance to be launched after the login button is clicked, the completion of this game is mandatory, after the game launches, users will not be able to use the program without completing the game. The difficulty of the mazes are randomized, with most being easy. Upon completion of the game, users can try to login again.  
 
 **Warning:**
 Once the maze is launched, the exit application button will be disabled. To close the app anyways, go to task explorer and end the task called "OpenJDK Platform Binary". 
