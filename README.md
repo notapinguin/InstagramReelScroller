@@ -50,7 +50,7 @@ Selenium is used for web automation. Make sure to include the appropriate Seleni
     ```
 
 ### 3. **Chrome WebDriver**
-To interact with Chrome using Selenium, you need the Chrome WebDriver. You can download it from [here](https://sites.google.com/a/chromium.org/chromedriver/), or use a tool like [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) to manage the WebDriver automatically.
+To interact with Chrome using Selenium, you need the Chrome WebDriver. You can download it from [here](https://sites.google.com/chromium.org/driver/home), or use a tool like [WebDriverManager](https://github.com/bonigarcia/webdrivermanager) to manage the WebDriver automatically.
 
 - **WebDriverManager (Maven)**:
     ```xml
@@ -69,4 +69,15 @@ To interact with Chrome using Selenium, you need the Chrome WebDriver. You can d
 ### 4. **Custom Font**
 The project includes a custom font (`ABeeZee-Regular.ttf`). Make sure to place this font file in the `resources` folder or another appropriate directory.
 
-
+## Known Issues
+- Due to poor optimization, the rate of duration checks can slow down over time, leading to incorrect/improper detection after some time
+## Future Features
+- More complex minigames before allowing users to use program
+- Remember me for username and password, stored and encrypted locally
+- Dark mode
+- Custom UI that fetches content from instagram
+- Optimized code
+- Better error logging
+- Personal stats page and anonymized global stats
+- Collect demographic data, and corrosponding for you page information via sentiment analysis with a pretrained model (which age/gender/race likes a certain type of content?)
+- 
