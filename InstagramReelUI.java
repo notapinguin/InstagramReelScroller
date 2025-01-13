@@ -5,7 +5,13 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+/*Create a Java Swing-based user interface for an Instagram login screen with a custom font, username and password fields, 
+and a button that either leads to a maze game or starts scrolling content depending on a random chance. Use FlatLaf, and 
+handle the UI interactions accordingly
 
+
+
+*/
 public class InstagramReelUI {
     private JFrame frame;
     private JTextField usernameField;
@@ -13,7 +19,7 @@ public class InstagramReelUI {
     private Font customFont;
     private double mazeChance = 0.8;
     private boolean startScrolling = false;
-
+    
     public InstagramReelUI(ActionListener onLoginClick) {
         // Set the FlatLaf look and feel
         try {
