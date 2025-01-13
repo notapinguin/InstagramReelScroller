@@ -36,9 +36,28 @@ public class InstagramReelScroller {
     }
 
     /*
-    any methods below this point were written by chatgpt with the prompt "write java methods, based in selenium that open a chrome page, navigate to instagram, 
+    any methods below this point were written by chatgpt 
+    initial prompt: "write java methods, based in selenium that open a chrome page, navigate to instagram, 
     login based on a pre given username and password, click the login button, go through the save info/don't save info page, then navigate to reels, after this, 
     scroll forever with a scrollReels method
+    chatGPT prompts didn't work, too much to ask at once. 
+    
+    "Create a Java class that handles Instagram login and scrolling logic."
+    "Include methods for logging into Instagram using a username and password."
+    "Simulate scrolling through Instagram Reels programmatically."
+
+
+    "Write a method to input a username and password into Instagram's login form."
+    "Handle login errors such as invalid credentials or CAPTCHA challenges."
+    doesn't work
+    
+    "Make a method to navigate to instagram reels"  
+    "Use libraries like Selenium or an equivalent for browser automation in Java."
+    "Set up and configure WebDriver for Instagram automation."
+    "Add retry logic for failed login attempts or interruptions in scrolling."
+    "Make the class modular so it can integrate with a main UI file."
+
+    
 
     chatGPT's methods didn't take into account anything when scrolling reels (after 5 seconds, it would scroll)
     after another repeated prompt, "the reels method should search for a video element in the page, and scroll when the video's elapsed duration equals 
