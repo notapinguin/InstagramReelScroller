@@ -12,7 +12,31 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Random;
+/*
+made multiple prompts to chatGPT (using its code editor feature)
+"Create a Java program for a maze-solving game using Swing for the user interface."
+"Set up a JFrame for a game window with a JPanel for rendering the maze."
+"Implement a recursive algorithm to generate a random maze of a given size"
+"Ensure the maze has a valid path from the start to the exit"
 
+"Implement a recursive backtracking algorithm to generate a random maze"
+"Ensure the maze has a valid path from the start to the exit."
+"Add key controls to move a player through the maze using arrow keys or WASD"
+"Implement logic to reset the game if the player leaves the shortest path."
+
+"Use Dijkstra's algorithm to find the shortest path in the maze."
+"Highlight the shortest path on the maze when a specific key is pressed"
+"Include a way to reset the game when the player leaves the optimal path to solving the maze."
+"Add logic to prevent the maze from being unsolvable."
+"The player should be blue, the end should be red, and the walls should be black"
+"Ensure the maze size is always odd for proper generation."
+"Add a check to regenerate the maze if no valid path exists."
+"The game should close itself if it completes, there should be no other way to close it"
+chatGPT ignored the second half of the last statement, so i manually added the line "setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);"
+
+there were almost no issues in getting the game to work, everything worked on the first try
+there was one edge case that would cause infinite recursion when generating a maze, fixed manually 
+*/
 public class MazeSolverGame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new GameFrame());
