@@ -5,9 +5,36 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-/*Create a Java Swing-based user interface for an Instagram login screen with a custom font, username and password fields, 
+/*
+Create a Java Swing-based user interface for an Instagram login screen with a custom font, username and password fields, 
 and a button that either leads to a maze game or starts scrolling content depending on a random chance. Use FlatLaf, and 
 handle the UI interactions accordingly
+this prompt didn't work (too much at once)
+
+"How do I create a login screen in Java Swing?"
+"How to set up a JFrame with custom panels and layouts?"
+"How to style JTextField and JPasswordField with custom colors and borders in Swing?"
+"How to load and use a custom TTF font in a Java Swing application?"
+
+"Create a basic Java Swing app that is meant to be a login screen" 
+"Add fields for username and password in the login screen."
+"Use FlatLaf for theming and ensure the UI looks professional."
+"Include a custom TTF font for the UI and ensure there's a fallback font if it fails to load."
+"Style the text fields and buttons with custom colors, borders, and fonts. Use the following colors: 282f39, 111518, 1a80e6, 000000."
+"Make a login button, it should be consistent with the color palette."
+"There is a modular file meant to integrate with the current UI file, (pasted entire InstagramReelScroller.java file), when logging in, it should input the user's information into the helper methods" 
+this step took manual debugging, most likely because it was a unique issue/not many people have asked chatgpt this in the past
+
+"Ensure 75% chance of the maze game launching and 25% chance of starting Instagram reels ."
+this step took manual debugging, most likely because it was a unique issue/not many people have asked chatgpt this in the past
+
+"Make the button disabled during processing and re-enable it after actions are completed."
+this step took manual debugging, the prompt was most likely too general and not clear enough
+it was intended to disable the login button if the maze game or instagram reels was running
+
+"Add error messages for scenarios like failed font loading or invalid actions."
+
+
 
 
 
