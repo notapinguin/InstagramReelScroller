@@ -24,19 +24,19 @@ this prompt didn't work (too much at once)
 "Make a login button, it should be consistent with the color palette."
 "There is a modular file meant to integrate with the current UI file, (pasted entire InstagramReelScroller.java file), when logging in, it should input the user's information into the helper methods" 
 this step took manual debugging, most likely because it was a unique issue/not many people have asked chatgpt this in the past
+this step took way too long, it would have been equally as fast if not faster to write the whole class manually
 
-"Ensure 75% chance of the maze game launching and 25% chance of starting Instagram reels ."
+"Ensure 80% chance of the maze game launching and 20% chance of starting Instagram reels. Each time the login button is pressed, half the probability of getting the maze game."
 this step took manual debugging, most likely because it was a unique issue/not many people have asked chatgpt this in the past
+maze game was not running, and when it did, it would crash when resetting
+this step also took way too long
+i had to read documentation :(
 
 "Make the button disabled during processing and re-enable it after actions are completed."
 this step took manual debugging, the prompt was most likely too general and not clear enough
-it was intended to disable the login button if the maze game or instagram reels was running
+it was intended to disable the login button if the maze game or instagram reels was running (to avoid bugs)
 
 "Add error messages for scenarios like failed font loading or invalid actions."
-
-
-
-
 
 */
 public class InstagramReelUI {
