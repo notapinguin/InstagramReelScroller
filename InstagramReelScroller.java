@@ -65,7 +65,7 @@ public class InstagramReelScroller {
 
     still didn't work, as instagram has multiple videos loaded at a time
 
-    after another prompt, "instagram reels loads multiple video elements at a time, make a list that stores them, and checks if they are in the middle of the screen
+    after another prompt, "instagram reels loads multiple video elements at a time, make a list that stores them, and checks if they are in the middle of the screen,
     if there is a video in the middle of the screen, the video in the middle of the screen should be selected. If the selected video's elapsed duration is equal to 
     the total duration, scroll to the next one"
 
