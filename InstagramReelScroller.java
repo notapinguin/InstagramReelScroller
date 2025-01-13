@@ -10,16 +10,18 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InstagramReelScroller {
-
+    
+    
     private static WebDriver driver;
     private static WebDriverWait wait;
-
+    // prompt: (pasted all code from instagramReelUI) given this class, and (pasted all methods other than main method), write a main method
+    // that launches the login to instagram custom GUI page
     public static void main(String[] args) {
         InstagramReelUI[] ui = new InstagramReelUI[1]; // Use an array to allow modification in the lambda
         ui[0] = new InstagramReelUI(e -> {});
     }
     
-
+    // StartScrolling was written by me
     static void startScrolling(String username, String password){
         initializeDriver();
             navigateToInstagram();
@@ -33,6 +35,26 @@ public class InstagramReelScroller {
             }
     }
 
+    /*
+    any methods below this point were written by chatgpt with the prompt "write java methods, based in selenium that open a chrome page, navigate to instagram, 
+    login based on a pre given username and password, click the login button, go through the save info/don't save info page, then navigate to reels, after this, 
+    scroll forever with a scrollReels method
+
+    chatGPT's methods didn't take into account anything when scrolling reels (after 5 seconds, it would scroll)
+    after another repeated prompt, "the reels method should search for a video element in the page, and scroll when the video's elapsed duration equals 
+    the total duration of the video"
+
+    still didn't work, as instagram has multiple videos loaded at a time
+
+    after another prompt, "instagram reels loads multiple video elements at a time, make a list that stores them, and checks if they are in the middle of the screen
+    if there is a video in the middle of the screen, the video in the middle of the screen should be selected. If the selected video's elapsed duration is equal to 
+    the total duration, scroll to the next one"
+
+    the code works, but is not optimized at all (video elements are never removed, so it takes forever to scroll after a while scrolling)
+    I had to adjust some of the scrolling logic manually for it to scroll properly (videos end when totalTime - elapsedTime <= 2)
+    
+    Most debug mesesages (println) were written manually 
+    */
     // Method to initialize the WebDriver
     private static void initializeDriver() {
         ChromeOptions options = new ChromeOptions();
@@ -70,7 +92,8 @@ public class InstagramReelScroller {
     }
 
     // Method to save login information
-  
+    //does NOT steal login information (use wireshark to verify if you don't believe me)
+    //presses "save info" button on instagram login page
 private static void saveLoginInfo() {
     try {
         // Wait for the "Save Info" button to be clickable using its class
