@@ -36,7 +36,7 @@ public class InstagramReelScroller {
     }
 
     /*
-    any methods below this point were written by chatgpt 
+    any methods, except for when indicated differently, below this point were written by chatgpt 
     initial prompt: "write java methods, based in selenium that open a chrome page, navigate to instagram, 
     login based on a pre given username and password, click the login button, go through the save info/don't save info page, then navigate to reels, after this, 
     scroll forever with a scrollReels method
@@ -174,7 +174,7 @@ public static void scrollReels(int reels) {
         videos.clear();
         videos = null;
 
-        if (currentVideo != null && currentVideo.isDisplayed()) {
+        if (currentVideo != null && currentVideo.isDisplayed()) { //manually written
             String videoUrl = currentVideo.getDomAttribute("src");
             System.out.println("Playing video with src: " + videoUrl);
 
