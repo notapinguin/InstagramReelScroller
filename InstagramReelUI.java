@@ -28,7 +28,7 @@ this step took way too long, it would have been equally as fast if not faster to
 
 "Ensure 80% chance of the maze game launching and 20% chance of starting Instagram reels. Each time the login button is pressed, half the probability of getting the maze game."
 this step took manual debugging, most likely because it was a unique issue/not many people have asked chatgpt this in the past
-maze game was not running, and when it did, it would crash when resetting
+maze game was not running, and when it did, it would crash when resetting - some adjustments were made to the maze class to make it work with jdialog 
 this step also took way too long
 i had to read documentation :(
 
@@ -130,9 +130,10 @@ public class InstagramReelUI {
 
         // Disable the button after one click
         loginButton.addActionListener(e -> {
-            // Disable button during execution
+            // chatGPT tried to use a different line of code that overcomplicated the solution and didnt work, manually added, found through java documentation
             loginButton.setEnabled(false);
             // Generate a random number between 0 and 1
+            //the chance code was manually written
             double randomChance = Math.random();
 
             if (randomChance < mazeChance) {
@@ -142,8 +143,9 @@ public class InstagramReelUI {
                     // Decrease the maze chance by half after completing the maze
                     mazeChance = mazeChance == 0 ? mazeChance : mazeChance/2.0;
                 }
-            } else {
-                // 25% chance (initial) to go to the Instagram login screen
+            } //AI generated with some prompting
+            else {
+                // 20% chance (initial) to go to the Instagram login screen
                 startScrolling = true; // Set flag to true to trigger scrolling
                 loginButton.setEnabled(false);
             }
@@ -172,12 +174,13 @@ public class InstagramReelUI {
         frame.add(mainPanel);
         frame.setVisible(true);
     }
+    //written initially with AI, "write a method to start the maze game", manual editing was needed 
     private static boolean runMazeGame(JFrame parent) {
         final boolean[] gameCompleted = {false}; // Track if the game was solved
     
         // Create a modal dialog to host the game
-        JDialog gameDialog = new JDialog(parent, "Maze Solver", true);
-        gameDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+        JDialog gameDialog = new JDialog(parent, "Maze Solver", true); //manually made it modal (unable to interact with parent frame until gameDialog was closed). Found through reading java documentation
+        gameDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE); //manual code, suggested bug fix by chatgpt, found through java documentation 
     
         // Create a GameFrame with a callback for when the game is completed
         GameFrame gameFrame = new GameFrame(() -> {
@@ -192,7 +195,7 @@ public class InstagramReelUI {
         gameDialog.pack();
         gameDialog.setLocationRelativeTo(parent);
     
-        // Show the dialog (blocks the parent thread)
+        // for some reason, chatgpt didn't automatically add this, making the gamedialog invisible, manually added, found through java documentation
         gameDialog.setVisible(true);
     
         return gameCompleted[0];
