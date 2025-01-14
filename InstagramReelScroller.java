@@ -146,6 +146,7 @@ private static void waitForXSeconds(int seconds) {
     }
 }
 
+    //reels detection didn't work until after manual prompting (prompts at top of file)
 public static void scrollReels(int reels) {
     AtomicBoolean stopReelDetection = new AtomicBoolean(false);
 
