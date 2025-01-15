@@ -206,7 +206,7 @@ public class InstagramReelUI {
     
 
 
-
+//worked first try
     private void loadCustomFont() {
         try {
             customFont = Font.createFont(Font.TRUETYPE_FONT, new File("resources/ABeeZee-Regular.ttf"));
