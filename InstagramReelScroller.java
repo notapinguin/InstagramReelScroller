@@ -1,4 +1,4 @@
-
+//all imports were automatic by chatgpt
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -21,7 +21,7 @@ public class InstagramReelScroller {
         ui[0] = new InstagramReelUI(e -> {});
     }
     
-    // StartScrolling was written by me
+    // StartScrolling was written by me with previous knowledge
     static void startScrolling(String username, String password){
         initializeDriver();
             navigateToInstagram();
