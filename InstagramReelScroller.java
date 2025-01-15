@@ -48,11 +48,11 @@ public class InstagramReelScroller {
 
 
     "Write a method to input a username and password into Instagram's login form."
-    "Handle login errors such as invalid credentials or CAPTCHA challenges."
-    doesn't work
+    "Handle the "save information" page that appears after logging into Instagram."
+    
     
     "Make a method to navigate to instagram reels"  
-    "Use libraries like Selenium or an equivalent for browser automation in Java."
+    "Use libraries like Selenium for browser automation in Java."
     "Set up and configure WebDriver for Instagram automation."
     "Add retry logic for failed login attempts or interruptions in scrolling."
     "Make the class modular so it can integrate with a main UI file."
@@ -63,7 +63,7 @@ public class InstagramReelScroller {
     after another repeated prompt, "the reels method should search for a video element in the page, and scroll when the video's elapsed duration equals 
     the total duration of the video"
 
-    still didn't work, as instagram has multiple videos loaded at a time
+    still didn't work, as instagram has multiple videos loaded at a time (found through manual testing) 
 
     after another prompt, "instagram reels loads multiple video elements at a time, make a list that stores them, and checks if they are in the middle of the screen,
     if there is a video in the middle of the screen, the video in the middle of the screen should be selected. If the selected video's elapsed duration is equal to 
@@ -110,7 +110,7 @@ public class InstagramReelScroller {
         }
     }
 
-    // Method to save login information
+    // Method to press save login information
     //does NOT steal login information (use wireshark to verify if you don't believe me)
     //presses "save info" button on instagram login page
 private static void saveLoginInfo() {
